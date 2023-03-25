@@ -26,7 +26,6 @@ const navigate = useNavigate();
 
     const handleInput = (event: { target: { value: any; }; }) => {
 
-        console.log('HAHA', event.target.value);
         setInput(event.target?.value);
     }
 

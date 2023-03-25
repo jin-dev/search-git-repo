@@ -13,13 +13,13 @@ function Main() {
         const path = `/search/${input}`
         navigate(path);
     } 
-
+/*
   useEffect(() => {
 
     async function onLoad() {
 
 // ?q=jin-dev&per_page=30&page=1
-
+        console.log('fetched on Main');
 
       await octokit.request('GET /search/repositories?q={user}', {
         user: 'jin-dev',
@@ -28,7 +28,7 @@ function Main() {
     } 
     onLoad();
 
-},[])
+},[]) */
 
 
 
