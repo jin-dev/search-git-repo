@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
+import { useNavigate } from 'react-router-dom'
 
 const Container = styled.div``;
 
@@ -16,19 +17,22 @@ const Input = styled.input`
     background-color: transparent;
     text-overflow: ellipsis;
     max-width: 50rem;
-    color: blanchedalmond;
 `
 
 function SearchBox({ value = '', placehoder , onSubmit} : any) {
 
 const [input, setInput] = useState(value);
+const navigate = useNavigate();
 
     const handleInput = (event: { target: { value: any; }; }) => {
+
+        console.log('HAHA', event.target.value);
         setInput(event.target?.value);
     }
 
     const routeChange = (input: string) => {
-       // let path = `/search/${input}`;
+    const path = `/search/${input}`;
+       navigate(path);
     }
 
     const handleKeyPress = (event: any) => {
@@ -45,9 +49,9 @@ const [input, setInput] = useState(value);
             <SearchInput>
                 <Input 
                 type='text'
-                value={input || ''}
+                value={input}
                 placeholder={placehoder}
-                onChange={handleInput}
+                onChange={ handleInput}
                 onKeyPress={handleKeyPress}
                 />
             </SearchInput>

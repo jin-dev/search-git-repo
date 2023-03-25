@@ -15,7 +15,7 @@ function App() {
 <BrowserRouter>
 <Routes>
  <Route path='/' Component={Main} />
- <Route path='/123' Component={Search} />
+ <Route path='/search/:q' Component={Search} />
  </Routes>
  </BrowserRouter>
   )
