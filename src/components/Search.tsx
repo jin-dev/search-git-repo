@@ -54,15 +54,16 @@ function Search() {
   }
 
   const fetchData = useCallback(
-    async (input : string) => {
+    async (input : string, page : number) => {
      
         console.log('fetched on Search11', input);
+       // console.log('The page No:', page)
         setLoading(true);
 
         try {
           const res = await octokit.request('GET /search/repositories?q={user}&per_page=10&page={page}', {
             user: input,
-            page: 1,
+            page: page || 1,
           });
 
           setData({
@@ -83,9 +84,10 @@ function Search() {
   );
 
   useEffect(() => {
+    console.log('the page on useEffect:', page);
     console.log('fetched ');
-    fetchData(q || '1');
-  }, [q]);
+    fetchData(q || '' , page);
+  }, [q, page]);
 
   return (
     <Fragment>
