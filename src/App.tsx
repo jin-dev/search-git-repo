@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+
 import { ThemeProvider } from 'styled-components'
 import Main from './components/Main'
 import Search from './components/Search';
@@ -8,7 +8,6 @@ import {
   Routes,
   BrowserRouter,
 } from 'react-router-dom';
-import './App.css'
 
 function App() {
   return (

@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom'
 
-const Container = styled.div``;
+const Container = styled.div`
+    display: flex;
+    flex-direction: row;
+    padding:1rem;
+    background-color: #1c2331;
+
+`;
 
 const SearchInput = styled.div`
 display: flex;
@@ -14,12 +20,14 @@ padding: 0.5rem;
 const Input = styled.input`
     border: 0;
     font-size: 1.2rem;
+    color:white;
     background-color: transparent;
     text-overflow: ellipsis;
-    max-width: 50rem;
+    max-width: 55rem;
+
 `
 
-function SearchBox({ value = '', placehoder , onSubmit} : any) {
+function SearchBox({ value = '', placehoder='type Git ID' , onSubmit} : any) {
 
 const [input, setInput] = useState(value);
 const navigate = useNavigate();

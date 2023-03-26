@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const Result = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 2.5rem;
 `;
 
 const List = styled.div``;

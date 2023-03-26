@@ -6,6 +6,12 @@ import SearchResult from './SearchResult';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { FcNext, FcPrevious } from 'react-icons/fc';
+import { throttle } from '../utils/throttle';
+
+const SearchContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 
 const Icon = styled.div`
   display: flex;
@@ -23,7 +29,7 @@ const Icon = styled.div`
 
 const Pagination = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   padding: 1rem;
   font-size: 1.2rem;
@@ -52,46 +58,46 @@ function Search() {
       setPage(page+1);
     }
   }
+  const fetchDataThrottled = throttle(async (input: string, page: number) => {
+    setLoading(true);
+  
+    try {
+      const res = await octokit.request(
+        'GET /search/repositories?q={user}&per_page={perPage}&page={page}',
+        {
+          user: input,
+          perPage: 15,
+          page: page || 1,
+        
+        }
+      );
+  
+      setData({
+        totalCount: res?.data?.total_count,
+        items: res.data?.items,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  
+    setLoading(false);
+  }, 500); // <-- 500ms delay
+  
 
   const fetchData = useCallback(
-    async (input : string, page : number) => {
-     
-        console.log('fetched on Search11', input);
-       // console.log('The page No:', page)
-        setLoading(true);
-
-        try {
-          const res = await octokit.request('GET /search/repositories?q={user}&per_page=10&page={page}', {
-            user: input,
-            page: page || 1,
-          });
-
-          setData({
-            totalCount: res?.data?.total_count,
-            items: res.data?.items,
-          });
-
-          // Update the input state with the new input value
-         // setInput(newInput);
-        } catch (e) {
-          console.log(e);
-        }
-
-        setLoading(false);
-      
+    async (input: string, page: number) => {
+      fetchDataThrottled(input, page);
     },
     []
   );
 
   useEffect(() => {
-    console.log('the page on useEffect:', page);
-    console.log('fetched ');
     fetchData(q || '' , page);
   }, [q, page]);
 
   return (
     <Fragment>
-      <div>Search</div>
+      <SearchContainer>
       <SearchBox value={q} placeholder="type your input" onSubmit={changeNavigation} />
 
       {data ? <SearchResult data={data} /> : null}
@@ -109,6 +115,7 @@ function Search() {
         </Icon>
        
       </Pagination>
+      </SearchContainer>
     </Fragment>
   );
 }
