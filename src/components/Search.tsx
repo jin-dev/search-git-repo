@@ -5,10 +5,35 @@ import SearchBox from './SearchBox';
 import SearchResult from './SearchResult';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { FcNext, FcPrevious } from 'react-icons/fc';
+
+const Icon = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  padding: 0.2rem;
+  cursor: pointer;
+
+  &:hover {
+    border-radius: 10px;
+    padding: 0.2rem;
+    border: 1px solid pink;
+  }
+`
+
+const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  font-size: 1.2rem;
+`
+
 function Search() {
   const [loading, setLoading] = useState<boolean>(false);
   const [query, setQuery] = useState<string>();
   const [data, setData] = useState<any>(null);
+  const [page, setPage] = useState<number>(1);
   const navigate = useNavigate();
 
   const { q } = useParams<any>();
@@ -18,6 +43,16 @@ function Search() {
     navigate(path);
   };
 
+  const actPagination = ( flag : number) => {
+
+    if (flag === 0 && page >= 2) {
+      setPage(page -1);
+    }
+    if (flag === 1 && page > 0) {
+      setPage(page+1);
+    }
+  }
+
   const fetchData = useCallback(
     async (input : string) => {
      
@@ -25,8 +60,9 @@ function Search() {
         setLoading(true);
 
         try {
-          const res = await octokit.request('GET /search/repositories?q={user}', {
+          const res = await octokit.request('GET /search/repositories?q={user}&per_page=10&page={page}', {
             user: input,
+            page: 1,
           });
 
           setData({
@@ -56,7 +92,21 @@ function Search() {
       <div>Search</div>
       <SearchBox value={q} placeholder="type your input" onSubmit={changeNavigation} />
 
-      <SearchResult data={data} />
+      {data ? <SearchResult data={data} /> : null}
+      <Pagination>
+        <Icon onClick={() => actPagination(0)}>
+        <FcPrevious/>
+        Prev
+        </Icon>
+        <div>
+          {page}
+        </div>
+        <Icon onClick={() => actPagination(1)}>
+        Next
+        <FcNext/>
+        </Icon>
+       
+      </Pagination>
     </Fragment>
   );
 }
