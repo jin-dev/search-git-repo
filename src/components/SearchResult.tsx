@@ -1,6 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
+interface SearchResultProps {
+  data: {
+    items: {
+      id: number;
+      name: string;
+    }[];
+  };
+}
+
 const Result = styled.div`
   display: flex;
   flex-direction: column;
@@ -14,14 +23,12 @@ const Repo = styled.div`
   border-bottom: 1px solid black;
 `;
 
-const SearchResult = ({ data }: { data: any }) => {
-  console.log('data in Result : ', data);
+const SearchResult: React.FC<SearchResultProps> = ({ data }) => {
+ 
   return (
     <Result>
       <List>
-        {(data?.items || []).map((row: any) => {
-          const { id, name } = row;
-
+        {(data?.items || []).map(( {id, name}) => {
           return <Repo key={id}>{name}</Repo>;
         })}
       </List>

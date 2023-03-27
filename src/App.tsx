@@ -1,7 +1,6 @@
 
-import { ThemeProvider } from 'styled-components'
-import Main from './components/Main'
-import Search from './components/Search';
+import Main from 'components/Main'
+import Search from 'components/Search';
 
 import {
   Route,

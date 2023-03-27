@@ -1,7 +1,7 @@
 
 type FuncType = (...args: any[]) => any;
 
-export function throttle(func: FuncType, delay: number) {
+export function throttle(func: FuncType, delay: number): FuncType {
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
     let lastArgs: any[];
   

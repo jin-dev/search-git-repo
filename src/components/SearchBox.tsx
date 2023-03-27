@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
+import React, { useState, useCallback } from 'react';
+import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom'
 
 const Container = styled.div`
@@ -27,29 +27,35 @@ const Input = styled.input`
 
 `
 
-function SearchBox({ value = '', placehoder='type Git ID' , onSubmit} : any) {
+interface SearchBoxProps {
+    value? : string;
+    placeholder?: string;
+    onSubmit: (input:string) => void;
+}
+
+function SearchBox({ value = '', placeholder='type Git ID' , onSubmit} : SearchBoxProps) {
 
 const [input, setInput] = useState(value);
 const navigate = useNavigate();
 
-    const handleInput = (event: { target: { value: any; }; }) => {
+    const handleInput = (event:  React.ChangeEvent<HTMLInputElement>) => {
 
         setInput(event.target?.value);
     }
 
-    const routeChange = (input: string) => {
+    const routeChange = useCallback((input: string) => {
     const path = `/search/${input}`;
        navigate(path);
-    }
+    },[navigate]);
 
-    const handleKeyPress = (event: any) => {
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         event.key === 'Enter' ? input ? handleSubmit() : null : null;
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = useCallback(() => {
         routeChange(input);
         onSubmit(input);
-    }
+    }, [input, onSubmit, routeChange])
 
     return (
         <Container id={'searchBox'}>
@@ -57,7 +63,7 @@ const navigate = useNavigate();
                 <Input 
                 type='text'
                 value={input}
-                placeholder={placehoder}
+                placeholder={placeholder}
                 onChange={ handleInput}
                 onKeyPress={handleKeyPress}
                 />

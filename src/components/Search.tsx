@@ -1,12 +1,13 @@
 import React, { Fragment, useState, useCallback, useEffect } from 'react';
-import styled, { css } from 'styled-components';
-import { octokit } from '../utils/octokit';
+import styled from 'styled-components';
+import { octokit } from 'utils/octokit';
 import SearchBox from './SearchBox';
 import SearchResult from './SearchResult';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { FcNext, FcPrevious } from 'react-icons/fc';
-import { throttle } from '../utils/throttle';
+import { throttle } from 'utils/throttle';
+import Loading from 'utils/loading';
 
 const SearchContainer = styled.div`
   display: flex;
@@ -36,20 +37,19 @@ const Pagination = styled.div`
 `
 
 function Search() {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [query, setQuery] = useState<string>();
-  const [data, setData] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [data, setData] = useState< { totalCount: number; items: any[]} | null>(null);
   const [page, setPage] = useState<number>(1);
   const navigate = useNavigate();
 
-  const { q } = useParams<any>();
+  const { q } = useParams< { q: string}>();
 
   const changeNavigation = (input: string) => {
     const path = `/search/${input}`;
     navigate(path);
   };
 
-  const actPagination = ( flag : number) => {
+  const actPagination = ( flag : 0 | 1) => {
 
     if (flag === 0 && page >= 2) {
       setPage(page -1);
@@ -59,7 +59,7 @@ function Search() {
     }
   }
   const fetchDataThrottled = throttle(async (input: string, page: number) => {
-    setLoading(true);
+    setIsLoading(true);
   
     try {
       const res = await octokit.request(
@@ -80,8 +80,8 @@ function Search() {
       console.log(e);
     }
   
-    setLoading(false);
-  }, 500); // <-- 500ms delay
+    setIsLoading(false);
+  }, 500) as (input: string, page: number) => Promise<void>;
   
 
   const fetchData = useCallback(
@@ -98,9 +98,9 @@ function Search() {
   return (
     <Fragment>
       <SearchContainer>
+       
       <SearchBox value={q} placeholder="type your input" onSubmit={changeNavigation} />
-
-      {data ? <SearchResult data={data} /> : null}
+      {isLoading ?  <Loading/> : data ? <SearchResult data={data} /> : null}     
       <Pagination>
         <Icon onClick={() => actPagination(0)}>
         <FcPrevious/>

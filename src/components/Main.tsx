@@ -1,4 +1,4 @@
-import { Fragment} from 'react';
+import React, { Fragment} from 'react';
 import SearchBox from './SearchBox';
 
 import styled from 'styled-components';
@@ -19,16 +19,19 @@ const MainTitle = styled.div`
 font-size: 1.4rem;
 font-weight: 700;
 color: whitesmoke;
-padding-bottom: 1rem;
+padding-bottom: .5rem;
 `
 
 const GitIcon = styled.span`
-  width: 1em;
-  height: 1em;
+  display: flex;
+  width: 5rem ;
+  height: 5rem ;  
+  font-size: 5rem;
   color:white;
+  padding-bottom: .5rem;
 `
 
-function Main() {
+const Main: React.FC = () => {
 
     const navigate = useNavigate();
 
@@ -43,7 +46,7 @@ function Main() {
            <GitIcon> <FaGithub/></GitIcon>
             <MainTitle>Repo Search (jin-dev)</MainTitle>
            
-            <SearchBox placeholder= 'type your input' onSubmit={changeNavigation}/>
+            <SearchBox placeholder= '' onSubmit={changeNavigation}/>
          
             </MainContainer>
         </Fragment>
