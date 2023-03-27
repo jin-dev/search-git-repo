@@ -19,6 +19,10 @@ const Result = styled.div`
 
 const List = styled.div``;
 
+const Info = styled.span`
+  font-size: 0.8rem;
+`;
+
 const Repo = styled.div`
   padding: 1rem 0 1rem 0;
   border-bottom: 1px solid black;
@@ -31,7 +35,7 @@ const SearchResult: React.FC<SearchResultProps> = ({ data }) => {
     <Result>
       <List>
         {(data?.items || []).map(( {id, name, html_url}) => {
-          return <Repo key={id}>{name} ::: {html_url}</Repo>;
+          return <Repo key={id}>[ {name} ] <br></br> <Info>{html_url}</Info></Repo>;
         })}
       </List>
     </Result>

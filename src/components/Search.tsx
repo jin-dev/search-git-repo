@@ -86,7 +86,7 @@ function Search() {
     }
   
     setIsLoading(false);
-  }, 500) as (input: string, page: number) => Promise<void>;
+  }, 3000) as (input: string, page: number) => Promise<void>;
   
 
   const fetchData = useCallback(

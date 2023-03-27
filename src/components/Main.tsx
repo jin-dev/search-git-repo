@@ -46,7 +46,7 @@ const Main: React.FC = () => {
            <GitIcon> <FaGithub/></GitIcon>
             <MainTitle>Repo Search (jin-dev)</MainTitle>
            
-            <SearchBox placeholder= '' onSubmit={changeNavigation}/>
+            <SearchBox placeholder= 'type git ID (ex. jin-dev)' onSubmit={changeNavigation}/>
          
             </MainContainer>
         </Fragment>
