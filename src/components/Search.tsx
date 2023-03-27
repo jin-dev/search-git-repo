@@ -79,7 +79,7 @@ function Search() {
   
       setData({
         totalCount: res?.data?.total_count,
-        items: res.data?.items,
+        items: Array.isArray(res.data?.items) ? res.data.items : [],
       });
     } catch (e) {
       console.log(e);
