@@ -1,11 +1,12 @@
 # Git Repo search (jin-dev)
 
-#### A simple repo search web application with github API
+#### A web application(react + typescript) that performs repository searches using GitHub API
 
 ## Table of contents
 
 - [Demo](#demo)
-- [Tech Stack](#tech)
+- [Screen Shot](#screen-shot)
+- [Tech Stack](#tech-stack)
 - [How to install](#installation)
 - [Components](#components)
 - [utils](#utils)
@@ -13,6 +14,25 @@
 ## Demo
 
 - Netlify : https://jin-dev-git-repo-search.netlify.app/
+
+## Screen Shot
+
+<table>
+    <tr>
+        <tr>
+        <th>PC</th>
+        </tr>
+    </tr>
+    <td> <img src="public/pcMain.png" alt="1"></td>
+    <td> <img src="public/pcResult.png" alt="2"></td>
+<tr>
+    <tr>
+    <th>Mobile</th>
+    <tr>
+    </tr>
+      <td> <img src="public/mobileMain.png" alt="3"></td>
+    <td> <img src="public/mobileResult.png" alt="4"></td>
+</table>
 
 ## Tech-Stack
 
