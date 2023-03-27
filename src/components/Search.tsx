@@ -38,7 +38,7 @@ const Pagination = styled.div`
 
 interface SearchResult {
   totalCount: number;
-  items: { id: number; name: string}[];
+  items: { id: number; name: string; html_url: string}[];
 }
 
 function Search() {
