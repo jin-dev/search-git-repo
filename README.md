@@ -12,7 +12,7 @@
 
 ## Demo
 
-- Netlify : (will be updated soon)
+- Netlify : https://jin-dev-git-repo-search.netlify.app/
 
 ## Tech-Stack
 

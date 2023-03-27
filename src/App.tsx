@@ -6,6 +6,7 @@ import {
   Route,
   Routes,
   BrowserRouter,
+  Navigate,
 } from 'react-router-dom';
 
 function App() {
@@ -14,6 +15,10 @@ function App() {
 <Routes>
  <Route path='/' Component={Main} />
  <Route path='/search/:q' Component={Search} />
+ <Route
+        path="*"
+        element={<Navigate to="/" replace />}
+    />
  </Routes>
  </BrowserRouter>
   )
