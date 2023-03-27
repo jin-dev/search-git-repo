@@ -36,9 +36,14 @@ const Pagination = styled.div`
   font-size: 1.2rem;
 `
 
+interface SearchResult {
+  totalCount: number;
+  items: any[];
+}
+
 function Search() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [data, setData] = useState< { totalCount: number; items: any[]} | null>(null);
+  const [data, setData] = useState< SearchResult | null>(null);
   const [page, setPage] = useState<number>(1);
   const navigate = useNavigate();
 
