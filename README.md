@@ -19,19 +19,19 @@
 
 <table>
     <tr>
-        <tr>
+        <th>Mobile</th>
+    </tr>
+    <tr>
+        <td> <img src="public/mobileMain.png" alt="3"></td>
+        <td> <img src="public/mobileResult.png" alt="4"></td>
+    </tr>
+    <tr>
         <th>PC</th>
-        </tr>
     </tr>
-    <td> <img src="public/pcMain.png" alt="1"></td>
-    <td> <img src="public/pcResult.png" alt="2"></td>
-<tr>
     <tr>
-    <th>Mobile</th>
-    <tr>
+        <td> <img src="public/pcMain.png" alt="1"></td>
+        <td> <img src="public/pcResult.png" alt="2"></td>
     </tr>
-      <td> <img src="public/mobileMain.png" alt="3"></td>
-    <td> <img src="public/mobileResult.png" alt="4"></td>
 </table>
 
 ## Tech-Stack
