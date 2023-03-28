@@ -2,6 +2,8 @@ import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom'
 
+
+// Styled Components for container and input elements
 const Container = styled.div`
     display: flex;
     flex-direction: row;
@@ -26,7 +28,7 @@ const Input = styled.input`
     max-width: 55rem;
 
 `
-
+// Define the interface for the search box component
 interface SearchBoxProps {
     value? : string;
     placeholder?: string;
@@ -38,25 +40,29 @@ function SearchBox({ value = '', placeholder='type Git ID' , onSubmit} : SearchB
 const [input, setInput] = useState(value);
 const navigate = useNavigate();
 
+    // Define a function to handle changes to the search input
     const handleInput = (event:  React.ChangeEvent<HTMLInputElement>) => {
-
         setInput(event.target?.value);
     }
 
+    // Define a function to handle changes in the navigation path
     const routeChange = useCallback((input: string) => {
     const path = `/search/${input}`;
        navigate(path);
     },[navigate]);
 
+    // Define a function to handle key presses in the search input
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         event.key === 'Enter' ? input ? handleSubmit() : null : null;
     }
 
+    // Define a callback function to handle form submission
     const handleSubmit = useCallback(() => {
         routeChange(input);
         onSubmit(input);
     }, [input, onSubmit, routeChange])
 
+    // Render search box component
     return (
         <Container id={'searchBox'}>
             <SearchInput>
