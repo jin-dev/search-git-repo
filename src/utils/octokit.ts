@@ -1,5 +1,7 @@
 import { Octokit } from '@octokit/core'
 
+// Create a new instance of the Octokit with optional authentication
 export const octokit = new Octokit({
- // auth: process.env.AUTH_KEY,
+    // Uncomment and add your authentication details here if needed
+    // auth: ''
 })

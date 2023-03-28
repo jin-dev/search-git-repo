@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// Define the interface for search result data
 interface SearchResultProps {
   data: {
     items: {
@@ -10,7 +11,7 @@ interface SearchResultProps {
     }[];
   };
 }
-
+// Define the styled component for the search result
 const Result = styled.div`
   display: flex;
   flex-direction: column;
@@ -29,8 +30,9 @@ const Repo = styled.div`
   font-size: 1rem;
 `;
 
+// Render the search results based on the data provided
 const SearchResult: React.FC<SearchResultProps> = ({ data }) => {
- 
+  
   return (
     <Result>
       <List>

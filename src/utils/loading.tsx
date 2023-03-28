@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
+// Define keyframe animation for spinner
 const Spinner = keyframes`
     0% {
         transform: rotate(0deg);
@@ -10,6 +11,7 @@ const Spinner = keyframes`
     }
 `;
 
+// Define the styled components for spinner
 const SpinnerContainer = styled.div`
     display: flex;
     justify-content: center;
@@ -25,6 +27,7 @@ const SpinnerIcon = styled.div`
     animation: ${Spinner} 1s linear infinite;
 `;
 
+// Define the loading component
 const Loading = () => {
   return (
    <SpinnerContainer>

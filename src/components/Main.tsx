@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { FaGithub } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom'
 
-
+// Styled components for container, title, and icon
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -31,10 +31,13 @@ const GitIcon = styled.span`
   padding-bottom: .5rem;
 `
 
+// Define the main component for application
 const Main: React.FC = () => {
 
+    // Initialize the useNavigate for client-side routing
     const navigate = useNavigate();
 
+    // Define a function to handle chagnes in the navigation path
     const changeNavigation = (input : string) => {
         const path = `/search/${input}`
         navigate(path);
@@ -43,11 +46,9 @@ const Main: React.FC = () => {
     return (
         <Fragment>
            <MainContainer>
-           <GitIcon> <FaGithub/></GitIcon>
-            <MainTitle>Repo Search (jin-dev)</MainTitle>
-           
-            <SearchBox placeholder= 'type git ID (ex. jin-dev)' onSubmit={changeNavigation}/>
-         
+              <GitIcon> <FaGithub/></GitIcon>
+              <MainTitle>Repo Search (jin-dev)</MainTitle>
+              <SearchBox placeholder= 'type git ID (ex. jin-dev)' onSubmit={changeNavigation}/>
             </MainContainer>
         </Fragment>
     )
